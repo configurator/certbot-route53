@@ -24,9 +24,15 @@ then
     EXPAND="--expand"
 fi
 
+if [ ! -z "$SERVER" ];
+then
+    SERVER="--server $SERVER"
+fi
+
 $CERTBOT certonly -a "certbot-route53:auth" --non-interactive --text --agree-tos \
     $FORCERENEWAL \
     $EXPAND \
+    $SERVER \
     -d $DOMAIN \
     --email $EMAIL \
     --pre-hook "/root/certbot-route53/hook-pre.sh" \
